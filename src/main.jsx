@@ -12,11 +12,12 @@ const router = createBrowserRouter([
   },
   {
     path: "addEquipment",
-    element: <AddEquipment/>,
+    element: <AddEquipment />,
   },
   {
     path: "allEquipment",
-    element: <AllEquipment/>,
+    element: <AllEquipment />,
+    loader: () => fetch("http://localhost:3000/product"),
   },
 ]);
 createRoot(document.getElementById("root")).render(
