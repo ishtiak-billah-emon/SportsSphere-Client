@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddEquipment from "./pages/AddEquipment.jsx";
 import AllEquipment from "./pages/AllEquipment.jsx";
+import ViewDetails from "./pages/ViewDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
     path: "allEquipment",
     element: <AllEquipment />,
     loader: () => fetch("http://localhost:3000/product"),
+  },
+  {
+    path: "/product/:id",
+    element: <ViewDetails/>,
+    
   },
 ]);
 createRoot(document.getElementById("root")).render(

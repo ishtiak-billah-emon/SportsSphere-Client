@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const AllEquipment = () => {
   const loadedProducts = useLoaderData();
   const [products, setProducts] = useState(loadedProducts);
+  const navigate = useNavigate();
 
   return (
     <div className="overflow-x-auto">
@@ -41,14 +42,17 @@ const AllEquipment = () => {
                   </div>
                 </div>
               </td>
-              <td>
-                  {product.category}
-              </td>
+              <td>{product.category}</td>
               <td>{product.price}</td>
               <td>{product.rating}</td>
               <td>{product.quantity}</td>
               <th>
-                <button className="btn btn-ghost btn-xs">view details</button>
+                <button
+                  onClick={() => navigate(`/product/${product._id}`)}
+                  className="btn btn-ghost btn-xs"
+                >
+                  view details
+                </button>
               </th>
             </tr>
           ))}
