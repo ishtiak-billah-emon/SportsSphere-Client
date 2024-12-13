@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,6 +22,8 @@ const SignUp = () => {
 
         const createdAt = result?.user?.metadata?.creationTime;
         const user = { name, image, email, createdAt };
+        setUser(result.user);
+        updateUserProfile({ displayName: name, photoURL: image });
 
         fetch("http://localhost:3000/users", {
           method: "POST",
@@ -33,6 +37,7 @@ const SignUp = () => {
             console.log("user created to db: ", data);
             if (data.insertedId) {
               Swal.fire("Successfully signed up!");
+              navigate("/");
             }
           });
       })
@@ -104,6 +109,9 @@ const SignUp = () => {
               <button className="btn btn-primary">Sign Up</button>
             </div>
           </form>
+          <p>
+            Already have an account?<Link to={"/login"}> Login</Link>{" "}
+          </p>
         </div>
       </div>
     </div>

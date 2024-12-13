@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AddEquipment = () => {
+  const {user} = useContext(AuthContext);
+
   const handleAddEquipment = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,6 +19,8 @@ const AddEquipment = () => {
     const customization = form.customization.value;
     const deliveryTime = form.deliveryTime.value;
     const quantity = form.quantity.value;
+    const uname = form.uname.value;
+    const uemail = form.uemail.value;
 
     const product = {
       name,
@@ -27,6 +32,8 @@ const AddEquipment = () => {
       customization,
       deliveryTime,
       quantity,
+      uname,
+      uemail
     };
 
     // add to the server
@@ -133,6 +140,27 @@ const AddEquipment = () => {
               type="text"
               placeholder="Product Quamtity"
               name="quantity"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          {/* user email */}
+          <div>
+            <input
+              type="text"
+              // placeholder="Product Quamtity"
+              defaultValue={user.email}
+              name="uemail"
+              readOnly
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          {/* user Name */}
+          <div>
+            <input
+              type="text"
+              defaultValue={user.displayName}
+              name="uname"
+              readOnly
               className="input input-bordered w-full max-w-xs"
             />
           </div>

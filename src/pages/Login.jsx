@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { setUser, signInUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,6 +24,7 @@ const Login = () => {
           lastSignInTime,
         };
         setUser(res.user);
+        // console.log(res.user);
         fetch(`http://localhost:3000/users`, {
           method: "PATCH",
           headers: {
@@ -30,10 +35,11 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);           
-            console.log(data.modifiedCount);
+            // console.log(data.modifiedCount);
             if (data.modifiedCount) {
                Swal.fire("Successfully Logged in!");
-              //  console.log('okayyy');
+               navigate(location?.state ? location.state : "/");
+              //  Navigating to the home or saved state.
             } 
           });
       })
@@ -84,6 +90,9 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <p>
+            Do not have an account?<Link to={'/signup'}> Sign Up here </Link>{" "}
+          </p>
         </div>
       </div>
     </div>

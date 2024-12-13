@@ -7,6 +7,8 @@ import Login from "../pages/Login";
 import ViewDetails from "../pages/ViewDetails";
 import MyEquipment from "../pages/MyEquipment";
 import SignUp from "../pages/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import UpdateEquipment from "../pages/UpdateEquipment";
 
 // const { createBrowserRouter } = require("react-router-dom");
 // const { default: AddEquipment } = require("../pages/AddEquipment");
@@ -16,7 +18,7 @@ import SignUp from "../pages/SignUp";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
+    element: <MainLayout />,
     errorElement: <h2>Error page</h2>,
     children: [
       {
@@ -25,7 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addEquipment",
-        element: <AddEquipment/>,
+        element: (
+          <PrivateRoute>
+            <AddEquipment />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/allEquipment",
@@ -34,19 +40,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/myEquipment",
-        element: <MyEquipment />,
+        element: (
+          <PrivateRoute>
+            <MyEquipment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateEquipment",
+        element: (
+          <PrivateRoute>
+            <UpdateEquipment />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/product/:id",
-        element: <ViewDetails />,
+        element: (
+          <PrivateRoute>
+            <ViewDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: "/signup",
-        element: <SignUp/>,
+        element: <SignUp />,
       },
     ],
   },
