@@ -82,11 +82,30 @@ const UpdateEquipment = () => {
       uemail,
     };
 
-
-    // database 
-
-     
+    // database
+    fetch(`http://localhost:3000/product/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          console.log("successfully updated");
+          Swal.fire({
+            title: "Success!",
+            text: "product updated successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          e.target.reset();
+        }
+      });
   };
+
   return (
     <div>
       <form onSubmit={handleUpdate}>
@@ -213,7 +232,7 @@ const UpdateEquipment = () => {
             />
           </div>
 
-          <input type="submit" className="btn btn-primary " value="SUBMIT" />
+          <input type="submit" className="btn btn-primary " value="UPDATE" />
         </div>
       </form>
     </div>

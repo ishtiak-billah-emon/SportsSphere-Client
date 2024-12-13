@@ -38,7 +38,12 @@ const MyEquipment = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {equipments.map((equipment) => (
           // <li key={equipment._id}>{equipment.name}</li>
-          <ProductCard key={equipment._id} product={equipment}></ProductCard>
+          <ProductCard key={equipment._id} 
+          product={equipment} 
+          setProduct={setEquipments}
+          products={equipments}
+  
+          ></ProductCard>
         ))}
       </div>
     </div>

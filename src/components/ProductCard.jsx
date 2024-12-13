@@ -1,25 +1,57 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
-
-const ProductCard = ({product}) => {
-   const { user, loading } = useContext(AuthContext);
-const navigate = useNavigate();
+import Swal from "sweetalert2";
+const ProductCard = ({ product, setProduct, products }) => {
+  const { user, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
-    const {
-      _id,
-      name,
-      category,
-      image,
-      description,
-      price,
-      rating,
-      customization,
-      deliveryTime,
-      quantity,
-    } = product;
+  const {
+    _id,
+    name,
+    category,
+    image,
+    description,
+    price,
+    rating,
+    customization,
+    deliveryTime,
+    quantity,
+  } = product;
+
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/product/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Product has been deleted.",
+                icon: "success",
+              });
+              const remaining = products.filter((item) => item._id !== _id);
+              setProduct(remaining);
+            }
+            // console.log(data);
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <div className="card card-side bg-base-100 shadow-xl space-x-12 flex">
@@ -46,7 +78,12 @@ const navigate = useNavigate();
                 >
                   Update
                 </button>
-                <button className="btn join-item">Delete</button>
+                <button
+                  onClick={() => handleDelete(_id)}
+                  className="btn join-item"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
