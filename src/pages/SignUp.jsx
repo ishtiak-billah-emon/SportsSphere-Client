@@ -1,14 +1,46 @@
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
+
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const handleSignUp = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const image = form.image.value;
     const email = form.email.value;
     const password = form.password.value;
 
-    const user = {name, image, email, password};
-    console.log(user);
+    // firebase
+    createUser(email, password)
+      .then((result) => {
+        // console.log('Signed up user', result.user);
+        // database
+
+        const createdAt = result?.user?.metadata?.creationTime;
+        const user = { name, image, email, createdAt };
+
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("user created to db: ", data);
+            if (data.insertedId) {
+              Swal.fire("Successfully signed up!");
+            }
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
   return (
     <div>
@@ -67,11 +99,6 @@ const SignUp = () => {
                 className="input input-bordered"
                 required
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Sign Up</button>
