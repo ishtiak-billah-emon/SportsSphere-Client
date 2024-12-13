@@ -1,14 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const handleLogin = e =>{
+  const { setUser, signInUser } = useContext(AuthContext);
+  const handleLogin = (e) => {
     e.preventDefault();
-  }
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // firebase
+    signInUser(email, password)
+      .then((res) => {
+        // console.log(result.user);
+        const lastSignInTime = res.user?.metadata?.lastSignInTime;
+        const loginInfo = {
+          email,
+          lastSignInTime,
+        };
+        setUser(res.user);
+        fetch(`http://localhost:3000/users`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loginInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);           
+            console.log(data.modifiedCount);
+            if (data.modifiedCount) {
+               Swal.fire("Successfully Logged in!");
+              //  console.log('okayyy');
+            } 
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
   return (
     <div>
       <div className="hero bg-red-200 min-h-screen">
         <div className="card bg-green-100 w-full max-w-2xl shrink-0 shadow-2xl">
-          <h2 className="text-3xl font-bold text-center my-8">Welcome</h2>
+          <h2 className="text-3xl font-bold text-center my-8">Welcome Login</h2>
           <form className="card-body" onSubmit={handleLogin}>
             {/* email */}
             <div className="form-control">
@@ -42,7 +81,7 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Sign Up</button>
+              <button className="btn btn-primary">Login</button>
             </div>
           </form>
         </div>
