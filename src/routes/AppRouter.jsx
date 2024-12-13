@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/updateEquipment",
+        path: "/update/id/:id",
         element: (
           <PrivateRoute>
             <UpdateEquipment />
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/product/:id",
+        path: "/product/id/:id",
         element: (
           <PrivateRoute>
             <ViewDetails />

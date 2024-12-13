@@ -48,7 +48,7 @@ const AllEquipment = () => {
               <td>{product.quantity}</td>
               <th>
                 <button
-                  onClick={() => navigate(`/product/${product._id}`)}
+                  onClick={() => navigate(`/product/id/${product._id}`)}
                   className="btn btn-ghost btn-xs"
                 >
                   view details

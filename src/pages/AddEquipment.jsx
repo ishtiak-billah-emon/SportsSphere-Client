@@ -46,7 +46,7 @@ const AddEquipment = () => {
     })
       .then((result) => result.json())
       .then((data) => {
-        console.log("product send to server: ", data);
+        // console.log("product send to server: ", data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",

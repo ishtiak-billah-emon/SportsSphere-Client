@@ -7,7 +7,7 @@ const ViewDetails = () => {
 
   useEffect(() => {
     // Fetch product by ID
-    fetch(`http://localhost:3000/product/${id}`)
+    fetch(`http://localhost:3000/product/id/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error(err));
