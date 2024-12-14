@@ -41,6 +41,37 @@ const Footer = () => {
         <a className="link link-hover">Privacy policy</a>
         <a className="link link-hover">Cookie policy</a>
       </nav>
+      <aside className="mt-10 border-t pt-4 w-full flex flex-col items-center">
+        <p>© {new Date().getFullYear()} SPORTS SPHERE. All rights reserved.</p>
+        <p>Contact us: info@sportssphere.com | +880-1234-567890</p>
+        <div className="flex space-x-4 mt-2">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link link-hover"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+              alt="Facebook"
+              className="w-6 h-6"
+            />
+          </a>
+
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link link-hover"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+              alt="Instagram"
+              className="w-6 h-6"
+            />
+          </a>
+        </div>
+      </aside>
     </footer>
   );
 };

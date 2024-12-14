@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import google from "../assets/google.png";
 
 const Login = () => {
-  const { setUser, signInUser } = useContext(AuthContext);
+  const { setUser, signInUser, loginWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -34,13 +35,13 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // console.log(data);           
+            // console.log(data);
             // console.log(data.modifiedCount);
             if (data.modifiedCount) {
-               Swal.fire("Successfully Logged in!");
-               navigate(location?.state ? location.state : "/");
+              Swal.fire("Successfully Logged in!");
+              navigate(location?.state ? location.state : "/");
               //  Navigating to the home or saved state.
-            } 
+            }
           });
       })
       .catch((error) => {
@@ -49,6 +50,20 @@ const Login = () => {
         console.log(errorCode, errorMessage);
       });
   };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate(location?.state ? location.state : "/");
+    } catch (error) {
+      // console.error("Google login failed: ", error);
+      setError({
+        ...error,
+        googleLogin: error.message,
+      });
+    }
+  };
+
   return (
     <div>
       <div className="hero bg-red-200 min-h-screen">
@@ -80,18 +95,26 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+            <div className="flex flex-col gap-3">
+              <div className="form-control mt-6">
+                <button className="btn bg-[#fc601d] text-white  text-lg">
+                  Login
+                </button>
+              </div>
+              <div className="divider">OR</div>
+              <div className="form-control mt-6">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="btn text-white bg-[#58b97f] rounded-none"
+                >
+                  Login with Google
+                </button>
+              </div>
             </div>
           </form>
           <p>
-            Do not have an account?<Link to={'/signup'}> Sign Up here </Link>{" "}
+            Do not have an account?<Link to={"/signup"}> Sign Up here </Link>{" "}
           </p>
         </div>
       </div>

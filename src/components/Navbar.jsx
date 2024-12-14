@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Links, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
             {privateLink}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Sports Sphere</a>
+        <Link to='/' className="btn btn-ghost text-xl">Sports Sphere</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -89,7 +89,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={logOut}
-                  className="btn bg-[#58B97F] rounded-none text-white"
+                  className="btn bg-[#fc601d] rounded-none text-white"
                 >
                   {" "}
                   Logout
