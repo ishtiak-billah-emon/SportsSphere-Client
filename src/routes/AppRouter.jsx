@@ -10,13 +10,14 @@ import SignUp from "../pages/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import UpdateEquipment from "../pages/UpdateEquipment";
 import ErrorPage from "../pages/ErrorPage";
+import Category from "../components/Category";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/categories",
+        element: <Category />,
       },
     ],
   },
