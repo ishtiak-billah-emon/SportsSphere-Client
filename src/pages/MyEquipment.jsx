@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Loading from "./Loading";
 import ProductCard from "../components/ProductCard";
+import banner from "../assets/NoEquipment.png";
 
 const MyEquipment = () => {
   const { user } = useContext(AuthContext);
@@ -29,20 +30,25 @@ const MyEquipment = () => {
   }
 
   if (equipments.length === 0) {
-    return <div>No equipment found for your account.</div>;
+    return (
+      <>
+        <div className="flex justify-center mt-12">
+          <img className="h-96 w-1/2" src={banner} alt="No equipment found" />
+        </div>
+      </>
+    );
   }
 
   return (
     <div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {equipments.map((equipment) => (
           // <li key={equipment._id}>{equipment.name}</li>
-          <ProductCard key={equipment._id} 
-          product={equipment} 
-          setProduct={setEquipments}
-          products={equipments}
-  
+          <ProductCard
+            key={equipment._id}
+            product={equipment}
+            setProduct={setEquipments}
+            products={equipments}
           ></ProductCard>
         ))}
       </div>

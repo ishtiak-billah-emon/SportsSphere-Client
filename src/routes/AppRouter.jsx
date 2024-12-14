@@ -9,20 +9,21 @@ import MyEquipment from "../pages/MyEquipment";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import UpdateEquipment from "../pages/UpdateEquipment";
+import ErrorPage from "../pages/ErrorPage";
 
-// const { createBrowserRouter } = require("react-router-dom");
-// const { default: AddEquipment } = require("../pages/AddEquipment");
-// const { default: AllEquipment } = require("../pages/AllEquipment");
-// const { default: ViewDetails } = require("../pages/ViewDetails");
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <h2>Error page</h2>,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/home",
         element: <Home />,
       },
       {
