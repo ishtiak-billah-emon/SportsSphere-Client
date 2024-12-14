@@ -16,13 +16,13 @@ const Slider = () => {
         </div>
         <div id="item2" className="carousel-item w-full">
           <img
-            src={slider1}
+            src={slider3}
             className="w-full"
           />
         </div>
         <div id="item3" className="carousel-item w-full">
           <img
-            src={slider3}
+            src={slider1}
             className="w-full"
           />
         </div>
