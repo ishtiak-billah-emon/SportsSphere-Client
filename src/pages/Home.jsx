@@ -1,23 +1,27 @@
-import React from 'react';
-import Slider from '../components/Slider';
-import ProfessionalEquipment from '../components/ProfessionalEquipment';
-import Category from '../components/Category';
-import ShowProducts from '../components/ShowProducts';
+import React, { useState } from "react";
+import Slider from "../components/Slider";
+import ProfessionalEquipment from "../components/ProfessionalEquipment";
+import Category from "../components/Category";
+import ShowProducts from "../components/ShowProducts";
+import Events from "../components/Events";
 
 const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   return (
     <div>
-      <Slider/>
+      <Slider />
 
       {/* Category */}
-      <Category></Category>
+      <Category onSelectCategory={setSelectedCategory} />
 
-      {/* product */}
-
-      <ShowProducts></ShowProducts>
+      {/* Products */}
+      <ShowProducts selectedCategory={selectedCategory} />
 
       {/* Another section */}
-      <ProfessionalEquipment/>
+      <ProfessionalEquipment />
+
+      <Events></Events>
     </div>
   );
 };
