@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { AuthContext } from "../provider/AuthProvider";
+import Loading from "./Loading";
 
 const AddEquipment = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true); 
 
   const handleAddEquipment = (e) => {
     e.preventDefault();
@@ -33,10 +34,10 @@ const AddEquipment = () => {
       deliveryTime,
       quantity,
       uname,
-      uemail
+      uemail,
     };
 
-    // add to the server
+    // Add to the server
     fetch("http://localhost:3000/product", {
       method: "POST",
       headers: {
@@ -46,7 +47,6 @@ const AddEquipment = () => {
     })
       .then((result) => result.json())
       .then((data) => {
-        // console.log("product send to server: ", data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
@@ -55,11 +55,24 @@ const AddEquipment = () => {
             confirmButtonText: "Cool",
           });
         }
+       
+      })
+      .catch((error) => {
+       
+        Swal.fire({
+          title: "Error!",
+          text: `There was an issue adding the product. Please try again later.`,
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
       });
   };
+
+
+
   return (
-    <div>
-      <h2>Add Equipemt</h2>
+    <div className="border boder-[#e0e0e1] p-12 rounded-xl my-12">
+      <h2 className="font-bold text-2xl text-[#403F3F] mb-4 ">Add Products</h2>
       <form onSubmit={handleAddEquipment}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Product Name */}
@@ -138,7 +151,7 @@ const AddEquipment = () => {
           <div>
             <input
               type="text"
-              placeholder="Product Quamtity"
+              placeholder="Product Quantity"
               name="quantity"
               className="input input-bordered w-full max-w-xs"
             />
@@ -147,7 +160,6 @@ const AddEquipment = () => {
           <div>
             <input
               type="text"
-              // placeholder="Product Quamtity"
               defaultValue={user.email}
               name="uemail"
               readOnly
@@ -164,8 +176,13 @@ const AddEquipment = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
-
-          <input type="submit" className="btn btn-primary " value="SUBMIT" />
+          <div>
+            <input
+              type="submit"
+              className="btn btn-primary text-white  w-2/3"
+              value="Add Product"
+            />
+          </div>
         </div>
       </form>
     </div>

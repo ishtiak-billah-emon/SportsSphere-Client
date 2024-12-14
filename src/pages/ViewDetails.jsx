@@ -28,19 +28,20 @@ const ViewDetails = () => {
     deliveryTime,
     quantity,
   } = product;
-  const filledStars = Math.floor(rating); // Number of fully filled stars
-  const halfStar = rating % 1 !== 0; // Determine if there should be a half star
-  const emptyStars = 5 - filledStars - (halfStar ? 1 : 0); // Remaining empty stars
+  const filledStars = Math.floor(rating); 
+  const halfStar = rating % 1 !== 0;
+  const emptyStars = 5 - filledStars - (halfStar ? 1 : 0);
 
   return (
     <div>
-      <h2 className="text-4xl font-bold text-center mb-4">Product Details</h2>
-      <div className="card card-side bg-base-100 shadow-xl space-x-12">
-        <figure className="h-96 w-96 object-cover">
+      <h2 className="text-3xl font-bold text-[#403F3F]  mt-12 mb-4">
+        Product Details
+      </h2>
+      <div className="card card-side bg-base-100 shadow-xl space-x-12 mt-12">
+        <figure className="h-96 w-full object-cover">
           <img src={image} alt="Movie" />
         </figure>
-        <div className="card-body">
-          <h2 className="text-xl">{rating}</h2>
+        <div className="card-body space-y-4">
           <div className="rating rating-lg rating-half">
             {Array(filledStars)
               .fill()
@@ -53,35 +54,30 @@ const ViewDetails = () => {
                   defaultChecked
                 />
               ))}
-            <div className="w-1/2">
-              {" "}
-              {halfStar && (
-                <input
-                  type="radio"
-                  name="rating"
-                  className="mask mask-star-2 mask-half-2 bg-green-500 "
-                  defaultChecked
-                />
-              )}
-              {Array(emptyStars)
-                .fill()
-                .map((_, index) => (
-                  <input
-                    key={`empty-${index}`}
-                    type="radio"
-                    name="rating"
-                    className="mask mask-star-2 bg-gray-300"
-                  />
-                ))}
-            </div>
           </div>
-          <h2 className="text-5xl font-bold">{name}</h2>
-          <h3 className="text-3xl font-semibold text-[#fc601d]">${price}</h3>
+          <h2 className="text-4xl font-bold">{name}</h2>
+          <h3 className="text-2xl font-semibold text-[#fc601d]">${price}</h3>
           <div className="flex flex-col gap-4">
-            <p className="text-xl font-medium">{category}</p>
-            <p className="text-[#838592">{description}</p>
+            <p className="text-xl text-[#403F3F]  font-medium">
+              {" "}
+              Category: {category}
+            </p>
+            <div
+              tabIndex={0}
+              className="collapse collapse-arrow border-base-300 bg-base-200 border"
+            >
+              <div className="collapse-title text-xl font-medium">
+                Description
+              </div>
+              <div className="collapse-content">
+                <p>{description}</p>
+              </div>
+            </div>
             <p className="text-[#838592">
-              Available Customization: {customization}
+              <span className="text-[#403F3F] text-lg font-medium">
+                Available Customization:
+              </span>{" "}
+              {customization}
             </p>
           </div>
         </div>

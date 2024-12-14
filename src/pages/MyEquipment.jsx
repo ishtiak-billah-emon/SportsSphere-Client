@@ -40,7 +40,8 @@ const MyEquipment = () => {
   }
 
   return (
-    <div>
+    <div className=" rounded-2xl border boder-[#e0e0e1] mt-24 p-8">
+      <h2 className="font-bold text-2xl text-[#403F3F] mb-4 ">Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {equipments.map((equipment) => (
           // <li key={equipment._id}>{equipment.name}</li>

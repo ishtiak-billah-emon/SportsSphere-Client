@@ -108,7 +108,8 @@ const UpdateEquipment = () => {
   };
 
   return (
-    <div>
+    <div className="border boder-[#e0e0e1] p-12 rounded-xl my-12">
+      <h2 className="font-bold text-xl text-[#403F3F] mb-4 ">Update Product Informatioin</h2>
       <form onSubmit={handleUpdate}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Product Name */}
@@ -233,7 +234,11 @@ const UpdateEquipment = () => {
             />
           </div>
 
-          <input type="submit" className="btn btn-primary " value="UPDATE" />
+          <input
+            type="submit"
+            className="btn btn-primary w-2/3 text-white"
+            value="UPDATE"
+          />
         </div>
       </form>
     </div>

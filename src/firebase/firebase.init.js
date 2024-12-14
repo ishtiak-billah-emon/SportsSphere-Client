@@ -11,6 +11,13 @@ const firebaseConfig = {
   storageBucket: "sports-sphere-7ea1d.firebasestorage.app",
   messagingSenderId: "768649433093",
   appId: "1:768649433093:web:d6313b17e96100eb72cc6c",
+
+  // apiKey: import.meta.env.VITE_apiKey,
+  // authDomain: import.meta.env.VITE_authDomain,
+  // projectID: import.meta.env.VITE_projectID,
+  // storageBucket: import.meta.env.VITE_storageBucket,
+  // messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  // appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase
