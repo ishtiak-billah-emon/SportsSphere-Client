@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDhXJtKzGbfMrgolqHvDwD7TqGusjyXdN4",
+  apiKey: "",
   authDomain: "sports-sphere-7ea1d.firebaseapp.com",
   projectId: "sports-sphere-7ea1d",
   storageBucket: "sports-sphere-7ea1d.firebasestorage.app",
